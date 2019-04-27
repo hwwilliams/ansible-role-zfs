@@ -1,0 +1,17 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: zfs
+  author: hwwilliams
+  description: Installs ZFS
+  license: license (MIT)
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Fedora
+      versions:
+        - 29
+  galaxy_tags: []
