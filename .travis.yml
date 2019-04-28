@@ -6,7 +6,10 @@ env:
   global:
     - ROLE_NAME: zfs
   matrix:
+    - MOLECULE_DISTRO: centos6
     - MOLECULE_DISTRO: centos7
+    - MOLECULE_DISTRO: fedora27
+    - MOLECULE_DISTRO: fedora28
     - MOLECULE_DISTRO: fedora29
 
 install:
