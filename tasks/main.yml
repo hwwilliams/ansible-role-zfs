@@ -1,1 +1,10 @@
 ---
+- name: Run CentOS Related Tasks
+  include_tasks:
+    file: tasks/CentOS.yml
+  when: ansible_distribution == 'CentOS'
+
+- name: Run Fedora Related Tasks
+  include_tasks:
+    file: tasks/Fedora.yml
+  when: ansible_distribution == 'Fedora'
