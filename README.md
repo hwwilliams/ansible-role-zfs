@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/hwwilliams/ansible-role-zfs.svg?branch=master)](https://travis-ci.org/hwwilliams/ansible-role-zfs)
 
-Installs ZFS on CentOS/Fedora/RedHat based Linux systems via an Ansible role.
+Installs and configures [ZFS On Linux](http://zfsonlinux.org/) on CentOS/Fedora/RedHat based Linux systems via an Ansible role.
 
 Also on [Ansible Galaxy](https://galaxy.ansible.com/hwwilliams/zfs).
 
