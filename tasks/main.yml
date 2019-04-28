@@ -1,10 +1,16 @@
 ---
-- name: Run CentOS Related Tasks
+- name: Configure ZFS on Linux Repo (CentOS)
   include_tasks:
     file: tasks/CentOS.yml
-  when: ansible_distribution == 'CentOS'
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'CentOS'
+    - ansible_distribution_major_version == ['6', '7']
 
-- name: Run Fedora Related Tasks
+- name: Configure ZFS on Linux Repo (Fedora)
   include_tasks:
     file: tasks/Fedora.yml
-  when: ansible_distribution == 'Fedora'
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution == 'Fedora'
+    - ansible_distribution_major_version == ['27', '28', '29']
