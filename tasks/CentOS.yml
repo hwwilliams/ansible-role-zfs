@@ -3,6 +3,37 @@
   set_fact:
     distribution_version: "{{ ansible_distribution_version | replace('.', '_') }}"
 
-- name: Set ZFS Repo URL (CentOS)
+- name: Set ZFS on Linux Repo URL (CentOS)
   set_fact:
     zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ distribution_version | regex_replace('(_[0-9]+)$', '') }}.noarch.rpm"
+
+- name: Install ZFS on Linux Repo (CentOS)
+  become: true
+  yum: name="{{ zfs_repo_url }}" state=present
+
+- name: Disable ZFS on Linux DKMS Repo (CentOS)
+  become: true
+  lineinfile:
+    path: /etc/yum.repos.d/zfs.repo
+    regexp: '^enabled=1'
+    line: 'enabled=0'
+    insertafter: '^[zfs]'
+    firstmatch: true
+  when: zfs_kmod_centos
+
+- name: Enable ZFS on Linux kABI-Tracking Kmods Repo (CentOS)
+  become: true
+  lineinfile:
+    path: /etc/yum.repos.d/zfs.repo
+    regexp: '^enabled=0'
+    line: 'enabled=1'
+    insertafter: '^[zfs-kmod]'
+    firstmatch: true
+  when: zfs_kmod_centos
+
+- name: Install ZFS on Linux (CentOS)
+  become: true
+  yum:
+    name: zfs
+    state: present
+    update_cache: true
