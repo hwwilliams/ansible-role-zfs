@@ -1,14 +1,5 @@
 ---
-- name: Configure ZFS on Linux Repo (CentOS)
+- name: "Configure ZFS on Linux Repo ({{ ansible_distribution }})"
   include_tasks:
-    file: tasks/CentOS.yml
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution == 'CentOS'
-
-- name: Configure ZFS on Linux Repo (Fedora)
-  include_tasks:
-    file: tasks/Fedora.yml
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution == 'Fedora'
+    file: "tasks/{{ ansible_distribution }}.yml"
+  when: ansible_os_family == 'RedHat'
