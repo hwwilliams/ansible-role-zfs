@@ -1,4 +1,17 @@
 ---
-- name: Set ZFS Repo URL (Fedora)
+- name: Set ZFS on Linux Repo URL (Fedora)
   set_fact:
     zfs_repo_url: "{{ zfs_repo_download_url }}/fedora/{{ zfs_repo_release_name }}.fc{{ ansible_distribution_version }}.noarch.rpm"
+
+- name: Install ZFS on Linux Repo (Fedora)
+  become: true
+  dnf: name="{{ zfs_repo_url }}" state=present
+
+- name: Install ZFS on Linux (Fedora)
+  become: true
+  dnf:
+    name:
+        - kernel-devel
+        - zfs
+    state: present
+    update_cache: true
