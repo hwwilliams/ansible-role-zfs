@@ -15,7 +15,6 @@ galaxy_info:
     - name: Fedora
       versions:
         - 27
-        - 28
         - 29
   galaxy_tags:
     - system
