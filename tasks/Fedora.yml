@@ -1,0 +1,4 @@
+---
+- name: Set ZFS Repo URL (Fedora)
+  set_fact:
+    zfs_repo_url: "{{ zfs_repo_download_url }}/fedora/{{ zfs_repo_release_name }}.fc{{ ansible_distribution_version }}.noarch.rpm"

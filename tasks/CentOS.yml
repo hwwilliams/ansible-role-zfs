@@ -1,0 +1,8 @@
+---
+- name: Clean Distribution Version (CentOS)
+  set_fact:
+    distribution_version: "{{ ansible_distribution_version | replace('.', '_') }}"
+
+- name: Set ZFS Repo URL (CentOS)
+  set_fact:
+    zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ distribution_version | regex_replace('(_[0-9]+)$', '') }}.noarch.rpm"
