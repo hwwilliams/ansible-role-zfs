@@ -1,6 +1,6 @@
 ---
 # Repo URL variables
-zfs_repo_download_url: "http://download.zfsonlinux.org/"
+zfs_repo_download_url: "http://download.zfsonlinux.org"
 zfs_repo_release_name: "zfs-release"
 
 # Enable to configure ZFS repo to use kABI-Tracking Kmods
