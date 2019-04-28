@@ -1,1 +1,3 @@
 ---
+zfs_repo_download_url: "http://download.zfsonlinux.org/"
+zfs_repo_release_name: "zfs-release"
