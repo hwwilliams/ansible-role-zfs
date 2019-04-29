@@ -3,7 +3,7 @@
 zfs_repo_download_url: "http://download.zfsonlinux.org"
 zfs_repo_release_name: "zfs-release"
 
-# Enable to configure ZFS repo to use kABI-Tracking Kmods
-# instead of the default DKMS. Only applies to CentOS as ZFS
+# Disable to configure ZFS repo to use DKMS
+# instead of Kmods. Only applies to CentOS as ZFS
 # on Linux doesn't support Kmods on Fedora.
-zfs_kmod_centos: false
+zfs_kmod_centos: true
