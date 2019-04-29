@@ -37,3 +37,22 @@
     name: zfs
     state: present
     update_cache: true
+  when: zfs_kmod_centos
+
+- name: Install Epel-Release for Dependencies (Fedora)
+  become: true
+  dnf:
+    name: epel-release
+    state: present
+    update_cache: true
+  when: not zfs_kmod_centos
+
+- name: Install ZFS on Linux and Dependencies (Fedora)
+  become: true
+  dnf:
+    name:
+        - kernel-devel
+        - zfs
+    state: present
+    update_cache: true
+  when: not zfs_kmod_centos
