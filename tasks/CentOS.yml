@@ -21,7 +21,7 @@
     path: /etc/yum.repos.d/zfs.repo
     regexp: '^enabled=1'
     line: 'enabled=0'
-    insertafter: '{{ shorthand_distribution_version | replace("_", ".") }}/\$basearch/$'
+    insertafter: ' - dkms$'
     firstmatch: true
   when: zfs_kmod_centos
 
@@ -31,7 +31,7 @@
     path: /etc/yum.repos.d/zfs.repo
     regexp: '^enabled=0'
     line: 'enabled=1'
-    insertafter: '{{ shorthand_distribution_version | replace("_", ".") }}/kmod/\$basearch/$'
+    insertafter: ' - kmod$'
     firstmatch: true
   when: zfs_kmod_centos
 
