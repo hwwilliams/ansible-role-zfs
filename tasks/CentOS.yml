@@ -1,11 +1,15 @@
 ---
-- name: Clean Distribution Version (CentOS)
+- name: Cleaning Distribution Version (CentOS)
   set_fact:
-    distribution_version: "{{ ansible_distribution_version | replace('.', '_') }}"
+    clean_distribution_version: "{{ ansible_distribution_version | replace('.', '_') }}"
+
+- name: Convert Distribution Version to Shorthand (CentOS)
+  set_fact:
+    shorthand_distribution_version: "{{ distribution_version | regex_replace('(_[0-9]+)$', '') }}"
 
 - name: Set ZFS on Linux Repo URL (CentOS)
   set_fact:
-    zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ distribution_version | regex_replace('(_[0-9]+)$', '') }}.noarch.rpm"
+    zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ shorthand_distribution_version }}.noarch.rpm"
 
 - name: Install ZFS on Linux Repo (CentOS)
   become: true
@@ -17,7 +21,7 @@
     path: /etc/yum.repos.d/zfs.repo
     regexp: '^enabled=1'
     line: 'enabled=0'
-    insertafter: '^\[zfs]'
+    insertafter: '{{ shorthand_distribution_version | replace("_", ".") }}/\$basearch/$'
     firstmatch: true
   when: zfs_kmod_centos
 
@@ -27,7 +31,7 @@
     path: /etc/yum.repos.d/zfs.repo
     regexp: '^enabled=0'
     line: 'enabled=1'
-    insertafter: '^\[zfs-kmod]'
+    insertafter: '{{ shorthand_distribution_version | replace("_", ".") }}/kmod/\$basearch/$'
     firstmatch: true
   when: zfs_kmod_centos
 
