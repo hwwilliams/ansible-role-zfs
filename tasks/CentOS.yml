@@ -5,7 +5,7 @@
 
 - name: Convert Distribution Version to Shorthand (CentOS)
   set_fact:
-    shorthand_distribution_version: "{{ distribution_version | regex_replace('(_[0-9]+)$', '') }}"
+    shorthand_distribution_version: "{{ clean_distribution_version | regex_replace('(_[0-9]+)$', '') }}"
 
 - name: Set ZFS on Linux Repo URL (CentOS)
   set_fact:
