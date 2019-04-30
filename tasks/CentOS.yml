@@ -39,7 +39,7 @@
     update_cache: true
   when: zfs_kmod_centos
 
-- name: Install Epel-Release for Dependencies (Fedora)
+- name: Install ZFS on Linux DKMS Dependencies (CentOS)
   become: true
   dnf:
     name: epel-release
@@ -47,7 +47,7 @@
     update_cache: true
   when: not zfs_kmod_centos
 
-- name: Install ZFS on Linux and Dependencies (Fedora)
+- name: Install ZFS on Linux and DKMS Dependencies (CentOS)
   become: true
   dnf:
     name:
