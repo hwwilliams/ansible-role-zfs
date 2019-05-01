@@ -8,7 +8,9 @@ Also on [Ansible Galaxy](https://galaxy.ansible.com/hwwilliams/zfs).
 
 ## Requirements
 
-None.
+If installing ZFS with DKMS this role will also add the epel-release repo to install dependencies.
+
+If installing ZFS with Kmods the epel-release repo isn't required.
 
 ## Role Variables
 
