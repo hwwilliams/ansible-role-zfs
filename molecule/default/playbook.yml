@@ -8,3 +8,9 @@
       changed_when: false
   roles:
     - role: hwwilliams.zfs
+  tasks:
+    - name: Check If ZFS Is Installed
+      shell: zfs --help
+      register: zfs_available
+      failed_when: zfs_available.rc != 0
+      changed_when: false
