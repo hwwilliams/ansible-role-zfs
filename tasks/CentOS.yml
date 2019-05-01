@@ -15,24 +15,24 @@
   become: true
   yum: name="{{ zfs_repo_url }}" state=present
 
-- name: Enable ZFS on Linux Kmods Repo (CentOS)
-  become: true
-  lineinfile:
-    path: /etc/yum.repos.d/zfs.repo
-    regexp: '^enabled=0'
-    line: 'enabled=1'
-    backrefs: true
-    firstmatch: true
-  when: zfs_kmod_centos
-
 - name: Disable ZFS on Linux DKMS Repo (CentOS)
   become: true
-  lineinfile:
+  replace:
     path: /etc/yum.repos.d/zfs.repo
-    regexp: '^enabled=1'
-    line: 'enabled=0'
-    backrefs: true
-    firstmatch: true
+    regexp: 'enabled=1'
+    replace: 'enabled=0'
+    after: '\[zfs]'
+    before: '\[zfs-kmod]'
+  when: zfs_kmod_centos
+
+- name: Enable ZFS on Linux Kmods Repo (CentOS)
+  become: true
+  replace:
+    path: /etc/yum.repos.d/zfs.repo
+    regexp: 'enabled=0'
+    replace: 'enabled=1'
+    after: '\[zfs-kmod]'
+    before: '\[zfs-source]'
   when: zfs_kmod_centos
 
 - name: Install Epel-Release for ZFS on Linux DKMS Dependencies (CentOS)
