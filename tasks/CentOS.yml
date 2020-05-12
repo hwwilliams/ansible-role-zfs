@@ -3,13 +3,9 @@
   set_fact:
     clean_distribution_version: "{{ ansible_distribution_version | replace('.', '_') }}"
 
-- name: Convert Distribution Version to Shorthand (CentOS)
-  set_fact:
-    shorthand_distribution_version: "{{ clean_distribution_version | regex_replace('(_[0-9]+)$', '') }}"
-
 - name: Set ZFS on Linux Repo URL (CentOS)
   set_fact:
-    zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ shorthand_distribution_version }}.noarch.rpm"
+    zfs_repo_url: "{{ zfs_repo_download_url }}/epel/{{ zfs_repo_release_name }}.el{{ clean_distribution_version }}.noarch.rpm"
 
 - name: Install ZFS on Linux Repo (CentOS)
   become: true
